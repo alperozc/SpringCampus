@@ -3,7 +3,7 @@ package com.copring.springcampus.services;
 import com.copring.springcampus.dto.DepartmentDTO;
 import com.copring.springcampus.models.Department;
 import com.copring.springcampus.repos.DepartmentRepository;
-import com.copring.springcampus.utils.ResourceNotFoundException;
+import com.copring.springcampus.utils.responses.ResourceNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +28,10 @@ public class DepartmentService {
     public DepartmentDTO getDepartmentById(Long id) {
         Department department = departmentRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Department not found"));
         return convertToDTO(department);
+    }
+
+    public Department getDepartment(Long id) {
+        return departmentRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Department not found"));
     }
 
     public DepartmentDTO createDepartment(DepartmentDTO departmentDTO) {

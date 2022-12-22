@@ -5,7 +5,7 @@ import com.copring.springcampus.models.Department;
 import com.copring.springcampus.models.Faculty;
 import com.copring.springcampus.repos.DepartmentRepository;
 import com.copring.springcampus.repos.FacultyRepository;
-import com.copring.springcampus.utils.ResourceNotFoundException;
+import com.copring.springcampus.utils.responses.ResourceNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,6 +48,16 @@ public class FacultyService {
         Faculty faculty = convertToEntity(facultyDTO);
         return convertToDTO(facultyRepository.save(faculty));
     }
+
+    public Faculty getFacultyByName(String name) {
+        return facultyRepository.findByName(name).orElseThrow(() -> new ResourceNotFoundException("Faculty not found"));
+    }
+
+    public void deleteFaculty(Long facultyId) {
+        Faculty faculty = facultyRepository.findById(facultyId).orElseThrow(() -> new ResourceNotFoundException("Faculty not found"));
+        facultyRepository.delete(faculty);
+    }
+
 
     public FacultyDTO updateFaculty(Long id, FacultyDTO facultyDTO) {
         Faculty faculty = facultyRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Faculty not found"));

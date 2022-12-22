@@ -33,7 +33,13 @@ public class Lesson {
     private LocalTime endTime;
 
     @ManyToOne
-    @JoinColumn(name = "course_id")
-    private Course course;
+    @JoinColumn(name = "department_id", nullable = false)
+    private Department department;
+
+
+//    @ManyToOne
+//    @JoinColumn(name = "course_id")
+//    private Course course;
+
 
 }

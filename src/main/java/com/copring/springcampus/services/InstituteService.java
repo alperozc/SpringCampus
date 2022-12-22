@@ -3,7 +3,7 @@ package com.copring.springcampus.services;
 import com.copring.springcampus.dto.InstituteDTO;
 import com.copring.springcampus.models.Institute;
 import com.copring.springcampus.repos.InstituteRepository;
-import com.copring.springcampus.utils.ResourceNotFoundException;
+import com.copring.springcampus.utils.responses.ResourceNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +23,9 @@ public class InstituteService {
 
     public Institute getInstituteById(Long id) {
         return instituteRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Institute not found"));
+    }
+    public Institute getInstituteByName(String name) {
+        return instituteRepository.findByName(name).orElseThrow(() -> new ResourceNotFoundException("Institute not found"));
     }
 
     public Institute createInstitute(InstituteDTO instituteDTO) {

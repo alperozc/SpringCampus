@@ -16,4 +16,5 @@ public class LessonDTO {
     private LocalTime startTime;
     private LocalTime endTime;
     private CourseDTO course;
+    private DepartmentDTO department;
 }
