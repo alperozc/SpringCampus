@@ -37,9 +37,9 @@ public class Lesson {
     private Department department;
 
 
-//    @ManyToOne
-//    @JoinColumn(name = "course_id")
-//    private Course course;
+    @ManyToOne
+    @JoinColumn(name = "course_id")
+    private Course course;
 
 
 }

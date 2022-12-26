@@ -38,13 +38,13 @@ public class FacultyController {
         return ResponseEntity.ok(facultyDTO);
     }
 
-    @GetMapping
+    @GetMapping()
     public ResponseEntity<List<FacultyDTO>> getAllFaculties() {
         List<FacultyDTO> faculties = facultyService.getAllFaculties();
         return ResponseEntity.ok(faculties);
     }
 
-    @PostMapping
+    @PostMapping()
     public ResponseEntity<FacultyDTO> createFaculty(@Valid @RequestBody FacultyDTO facultyDTO) {
         FacultyDTO createdFaculty = facultyService.createFaculty(facultyDTO);
         return ResponseEntity.ok(createdFaculty);

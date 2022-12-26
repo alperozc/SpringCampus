@@ -1,14 +1,14 @@
 package com.copring.springcampus.dto;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
 @Getter
 @Setter
 @Builder
+@RequiredArgsConstructor
+@AllArgsConstructor
 public class CourseDTO {
 
     private Long id;

@@ -1,12 +1,12 @@
 package com.copring.springcampus.dto;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @Builder
+@RequiredArgsConstructor
+@AllArgsConstructor
 public class RoleDTO {
 
     private Long id;

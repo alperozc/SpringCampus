@@ -29,4 +29,6 @@ public class Department {
     @JoinColumn(name = "institute_id")
     private Institute institute;
 
+
+
 }
