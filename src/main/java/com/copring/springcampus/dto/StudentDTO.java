@@ -1,8 +1,9 @@
 package com.copring.springcampus.dto;
 
+import com.copring.springcampus.models.Department;
+import com.copring.springcampus.models.User;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
-
-import java.util.Date;
 
 
 @Getter
@@ -13,11 +14,11 @@ import java.util.Date;
 public class StudentDTO {
 
     private Long id;
-    private String name;
-    private String surname;
-    private Date dateOfBirth;
-    private Date registrationDate;
-    private String termAddress;
-    private Long departmentId;
+    private Long year;
+    private Long semester;
+    private User user;
+    private Department department;
 
 }
+
+

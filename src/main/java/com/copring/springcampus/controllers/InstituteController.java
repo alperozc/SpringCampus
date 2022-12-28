@@ -1,8 +1,12 @@
 package com.copring.springcampus.controllers;
 
+import com.copring.springcampus.dto.DepartmentDTO;
 import com.copring.springcampus.dto.InstituteDTO;
+import com.copring.springcampus.models.Department;
 import com.copring.springcampus.models.Institute;
+import com.copring.springcampus.services.DepartmentService;
 import com.copring.springcampus.services.InstituteService;
+import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,12 +20,14 @@ import java.util.stream.Collectors;
 public class InstituteController {
 
     private final InstituteService instituteService;
+    private final DepartmentService departmentService;
     private final ModelMapper modelMapper;
 
     @Autowired
-    public InstituteController(InstituteService instituteService, ModelMapper modelMapper) {
+    public InstituteController(InstituteService instituteService, ModelMapper modelMapper, DepartmentService departmentService) {
         this.instituteService = instituteService;
         this.modelMapper = modelMapper;
+        this.departmentService = departmentService;
     }
 
     @GetMapping
@@ -57,7 +63,19 @@ public class InstituteController {
     @DeleteMapping("/{instituteId}")
     public ResponseEntity<?> deleteInstitute(@PathVariable Long instituteId) {
         instituteService.deleteInstitute(instituteId);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok("Institute deleted");
+    }
+
+    @PostMapping("/{instituteId}/departments")
+    public ResponseEntity<DepartmentDTO> addDepartmentToInstitute(@PathVariable Long instituteId, @RequestBody @Valid DepartmentDTO departmentDTO) {
+        DepartmentDTO department = departmentService.addDepartmentToInstitute(instituteId, departmentDTO);
+        return ResponseEntity.ok(department);
+    }
+
+    @GetMapping("/{instituteId}/departments")
+    public List<DepartmentDTO> getDepartmentsByInstituteId(@PathVariable Long instituteId) {
+        List<DepartmentDTO> departments = departmentService.getAllDepartmentsByInstituteId(instituteId);
+        return departments;
     }
 
     private InstituteDTO convertToDTO(Institute institute) {

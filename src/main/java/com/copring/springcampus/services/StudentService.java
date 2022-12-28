@@ -25,7 +25,7 @@ public class StudentService {
     }
 
     public StudentDTO addStudent(StudentDTO studentDTO) {
-        Department department = departmentService.getDepartment(studentDTO.getDepartmentId());
+        Department department = departmentService.getDepartment(studentDTO.getDepartment().getId());
         Student student = modelMapper.map(studentDTO, Student.class);
         student.setDepartment(department);
         return modelMapper.map(studentRepository.save(student), StudentDTO.class);
@@ -33,9 +33,9 @@ public class StudentService {
 
     public StudentDTO updateStudent(Long id, StudentDTO studentDTO) {
         Student student = studentRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Student not found"));
-        Department department = departmentService.getDepartment(studentDTO.getDepartmentId());
+        //Department department = departmentService.getDepartment(studentDTO.getDepartmentId());
         modelMapper.map(studentDTO, student);
-        student.setDepartment(department);
+        //student.setDepartment(department);
         return modelMapper.map(studentRepository.save(student), StudentDTO.class);
     }
 

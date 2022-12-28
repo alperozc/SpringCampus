@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @NoArgsConstructor
 @Getter
 @Setter
@@ -29,6 +31,8 @@ public class Department {
     @JoinColumn(name = "institute_id")
     private Institute institute;
 
+    @OneToMany(mappedBy = "department")
+    private List<Student> students;
 
 
 }

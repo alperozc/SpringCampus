@@ -2,6 +2,7 @@ package com.copring.springcampus.controllers;
 
 import com.copring.springcampus.dto.LoginRequest;
 import com.copring.springcampus.dto.RefreshRequest;
+import com.copring.springcampus.dto.RegisterDTO;
 import com.copring.springcampus.dto.UserDTO;
 import com.copring.springcampus.models.User;
 import com.copring.springcampus.services.UserService;
@@ -25,14 +26,15 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@Valid @RequestBody UserDTO userDTO) {
-        User user = userService.register(userDTO);
+    public ResponseEntity<?> register(@Valid @RequestBody RegisterDTO userDTO) {
+        UserDTO user = userService.register(userDTO);
         return ResponseEntity.ok(user);
     }
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@Valid @RequestBody LoginRequest loginRequest) {
         String token = userService.login(loginRequest.getUsername(), loginRequest.getPassword());
+        //return ResponseEntity.ok(token);
         return ResponseEntity.ok(new LoginResponse(token));
     }
 

@@ -1,5 +1,6 @@
 package com.copring.springcampus.dto;
 
+import com.copring.springcampus.models.Student;
 import lombok.*;
 
 import java.util.List;
@@ -21,4 +22,6 @@ public class DepartmentDTO {
     public void setFacultyId(Long facultyId) {
         this.facultyId = facultyId;
     }
+
+    public List<Student> students;
 }

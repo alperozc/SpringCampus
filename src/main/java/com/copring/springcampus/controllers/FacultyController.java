@@ -1,7 +1,10 @@
 package com.copring.springcampus.controllers;
 
+import com.copring.springcampus.dto.DepartmentDTO;
 import com.copring.springcampus.dto.FacultyDTO;
+import com.copring.springcampus.models.Department;
 import com.copring.springcampus.models.Faculty;
+import com.copring.springcampus.services.DepartmentService;
 import com.copring.springcampus.services.FacultyService;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
@@ -17,12 +20,14 @@ import java.util.stream.Collectors;
 public class FacultyController {
 
     private final FacultyService facultyService;
+    private final DepartmentService departmentService;
     private final ModelMapper modelMapper;
 
     @Autowired
-    public FacultyController(FacultyService facultyService, ModelMapper modelMapper) {
+    public FacultyController(FacultyService facultyService, ModelMapper modelMapper, DepartmentService departmentService) {
         this.facultyService = facultyService;
         this.modelMapper = modelMapper;
+        this.departmentService = departmentService;
     }
 
     @GetMapping("/{facultyId}")
@@ -59,7 +64,21 @@ public class FacultyController {
     @DeleteMapping("/{facultyId}")
     public ResponseEntity<?> deleteFaculty(@PathVariable Long facultyId) {
         facultyService.deleteFaculty(facultyId);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok("Faculty deleted");
+    }
+
+    // Department section
+
+    @PostMapping("/{facultyId}/departments")
+    public ResponseEntity<DepartmentDTO> addDepartmentToFaculty(@PathVariable Long facultyId, @Valid @RequestBody DepartmentDTO departmentDTO) {
+        DepartmentDTO department = departmentService.addDepartmentToFaculty(facultyId, departmentDTO);
+        return ResponseEntity.ok(department);
+    }
+
+    @GetMapping("/{facultyId}/departments")
+    public ResponseEntity<List<DepartmentDTO>> getAllDepartmentsByFacultyId(@PathVariable Long facultyId) {
+        List<DepartmentDTO> departments = departmentService.getAllDepartmentsByFacultyId(facultyId);
+        return ResponseEntity.ok(departments);
     }
 
     private FacultyDTO convertToDTO(Faculty faculty) {
